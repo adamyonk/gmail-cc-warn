@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test 'test/**/*.test.js'",
-    "sync": "cp manifest.firefox.json firefox-dev/manifest.json && rsync -a --delete background/ firefox-dev/background/ && rsync -a --delete content/ firefox-dev/content/ && rsync -a --delete icons/ firefox-dev/icons/ && rsync -a --delete options/ firefox-dev/options/ && rsync -a --delete shared/ firefox-dev/shared/ && cp manifest.json safari-src/manifest.json",
+    "sync": "rsync -a --delete background/ firefox/background/ && rsync -a --delete content/ firefox/content/ && rsync -a --delete icons/ firefox/icons/ && rsync -a --delete options/ firefox/options/ && rsync -a --delete shared/ firefox/shared/ && cp manifest.json safari-src/manifest.json",
     "firefox:sync": "npm run sync"
   },
   "devDependencies": {

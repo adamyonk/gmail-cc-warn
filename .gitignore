@@ -1,10 +1,9 @@
 node_modules/
-firefox-dev/manifest.json
-firefox-dev/background/
-firefox-dev/content/
-firefox-dev/icons/
-firefox-dev/options/
-firefox-dev/shared/
+firefox/background/
+firefox/content/
+firefox/icons/
+firefox/options/
+firefox/shared/
 .DS_Store
 safari-src/manifest.json
 safari/build/
