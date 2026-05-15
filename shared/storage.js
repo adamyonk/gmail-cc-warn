@@ -48,6 +48,9 @@ export async function setConfig(partial) {
 
 export function onConfigChange(callback) {
   const api = globalThis.chrome ?? globalThis.browser;
+  if (!api?.storage?.onChanged) {
+    throw new Error('storage.onChanged API not available');
+  }
   const handler = (changes, areaName) => {
     if (areaName === 'sync' && changes[STORAGE_KEY]) {
       callback(mergeWithDefaults(changes[STORAGE_KEY].newValue ?? {}));
