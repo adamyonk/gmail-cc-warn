@@ -42,6 +42,8 @@ export function attachUi(dialog) {
   function render(warnings) {
     currentWarnings = warnings;
     while (container.firstChild) container.removeChild(container.firstChild);
+    // don't render when compose is minimized (title bar only)
+    if (dialog.offsetHeight < 80) return;
     for (const w of warnings) {
       container.appendChild(makeBannerNode(doc, w));
     }

@@ -66,12 +66,12 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
         }
 
         SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
-            guard error == nil else {
-                // Insert code to inform the user that something went wrong.
-                return
-            }
-
             DispatchQueue.main.async {
+                if error != nil {
+                    // Fallback: open Safari directly so user can go to Settings → Extensions
+                    NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.Safari.ExtensionPoint")
+                        ?? URL(string: "x-apple.systempreferences:")!)
+                }
                 NSApp.terminate(self)
             }
         }

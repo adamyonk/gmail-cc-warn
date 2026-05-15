@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26319BC45CAE5308969AFC5B /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 0692FC25F27451B48E37561E /* Resources */; };
 		66454B7E2FB72B35009E2DE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66454B7D2FB72B35009E2DE3 /* AppDelegate.swift */; };
 		66454B802FB72B35009E2DE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66454B7F2FB72B35009E2DE3 /* SceneDelegate.swift */; };
 		66454B832FB72B35009E2DE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66454B812FB72B35009E2DE3 /* LaunchScreen.storyboard */; };
@@ -30,7 +31,6 @@
 		66454BB42FB72B35009E2DE3 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66454B752FB72B35009E2DE3 /* SafariWebExtensionHandler.swift */; };
 		66454BB52FB72B35009E2DE3 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66454B752FB72B35009E2DE3 /* SafariWebExtensionHandler.swift */; };
 		F112001F205B500A96D3B916 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 0692FC25F27451B48E37561E /* Resources */; };
-		26319BC45CAE5308969AFC5B /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 0692FC25F27451B48E37561E /* Resources */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +76,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0692FC25F27451B48E37561E /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = "Shared (Extension)/Resources"; sourceTree = SOURCE_ROOT; };
 		66454B6E2FB72B34009E2DE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/Main.html; sourceTree = "<group>"; };
 		66454B6F2FB72B34009E2DE3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		66454B702FB72B34009E2DE3 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
@@ -97,7 +98,6 @@
 		66454B9D2FB72B35009E2DE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66454BA22FB72B35009E2DE3 /* To Recipient Warning Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "To Recipient Warning Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66454BA72FB72B35009E2DE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0692FC25F27451B48E37561E /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = "Shared (Extension)/Resources"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +285,7 @@
 				66454B942FB72B35009E2DE3 /* Sources */,
 				66454B952FB72B35009E2DE3 /* Frameworks */,
 				66454B962FB72B35009E2DE3 /* Resources */,
+				03049BE137F95CCC86362F46 /* Copy Web Extension Resources */,
 			);
 			buildRules = (
 			);
@@ -304,6 +305,7 @@
 				66454B9E2FB72B35009E2DE3 /* Sources */,
 				66454B9F2FB72B35009E2DE3 /* Frameworks */,
 				66454BA02FB72B35009E2DE3 /* Resources */,
+				4E23792E373F56D2A4499C5A /* Copy Web Extension Resources */,
 			);
 			buildRules = (
 			);
@@ -394,7 +396,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F112001F205B500A96D3B916 /* Resources in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,7 +403,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26319BC45CAE5308969AFC5B /* Resources in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +445,41 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		03049BE137F95CCC86362F46 /* Copy Web Extension Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Shared (Extension)/Resources",
+			);
+			name = "Copy Web Extension Resources";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(CONTENTS_FOLDER_PATH)/Resources/manifest.json",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rsync -av \"${SRCROOT}/Shared (Extension)/Resources/\" \"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Resources/\"";
+		};
+		4E23792E373F56D2A4499C5A /* Copy Web Extension Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Shared (Extension)/Resources",
+			);
+			name = "Copy Web Extension Resources";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(CONTENTS_FOLDER_PATH)/Resources/manifest.json",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rsync -av \"${SRCROOT}/Shared (Extension)/Resources/\" \"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Resources/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		66454B9B2FB72B35009E2DE3 /* PBXTargetDependency */ = {
@@ -532,7 +567,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -593,7 +628,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -614,6 +649,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DLX77NUK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "To Recipient Warning Extension";
@@ -647,6 +683,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DLX77NUK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "To Recipient Warning Extension";
@@ -683,6 +720,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DLX77NUK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "To Recipient Warning";
@@ -704,7 +742,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.adamyonk.gmailccwarn;
-				PRODUCT_NAME = "Gmail CC/To Recipient Warning";
+				PRODUCT_NAME = "To Recipient Warning";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -723,6 +761,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DLX77NUK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "To Recipient Warning";
@@ -744,7 +783,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.adamyonk.gmailccwarn;
-				PRODUCT_NAME = "Gmail CC/To Recipient Warning";
+				PRODUCT_NAME = "To Recipient Warning";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -760,11 +799,12 @@
 		66454BC02FB72B35009E2DE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DLX77NUK4;
 				ENABLE_APP_SANDBOX = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
+				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "To Recipient Warning Extension";
@@ -795,11 +835,12 @@
 		66454BC12FB72B35009E2DE3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DLX77NUK4;
 				ENABLE_APP_SANDBOX = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
+				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "To Recipient Warning Extension";
@@ -832,12 +873,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_APP_SANDBOX = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
+				DEVELOPMENT_TEAM = 4DLX77NUK4;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "To Recipient Warning";
@@ -856,7 +897,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.adamyonk.gmailccwarn;
-				PRODUCT_NAME = "Gmail CC/To Recipient Warning";
+				PRODUCT_NAME = "To Recipient Warning";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -873,12 +914,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_APP_SANDBOX = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
+				DEVELOPMENT_TEAM = 4DLX77NUK4;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "To Recipient Warning";
@@ -897,7 +938,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.adamyonk.gmailccwarn;
-				PRODUCT_NAME = "Gmail CC/To Recipient Warning";
+				PRODUCT_NAME = "To Recipient Warning";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

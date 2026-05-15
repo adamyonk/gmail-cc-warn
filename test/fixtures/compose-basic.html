@@ -1,19 +1,19 @@
 <div role="dialog">
-  <div aria-label="To recipients">
-    <div role="listbox">
-      <div role="option" email="alice@mycompany.com" data-hovercard-id="alice@mycompany.com">Alice</div>
-      <div role="option" email="bob@bar.com" data-hovercard-id="bob@bar.com">Bob</div>
+  <div class="to-field">
+    <div class="chips">
+      <div data-hovercard-id="alice@mycompany.com">Alice</div>
+      <div data-hovercard-id="bob@bar.com">Bob</div>
     </div>
+    <div class="input-wrap"><input aria-label="To recipients" type="text"></div>
   </div>
-  <div aria-label="Cc recipients">
-    <div role="listbox">
-      <div role="option" email="carol@mycompany.com" data-hovercard-id="carol@mycompany.com">Carol</div>
+  <div class="cc-field">
+    <div class="chips">
+      <div data-hovercard-id="carol@mycompany.com">Carol</div>
     </div>
+    <div class="input-wrap"><input aria-label="CC recipients" type="text"></div>
   </div>
-  <div aria-label="Bcc recipients">
-    <div role="listbox"></div>
+  <div class="bcc-field">
+    <div class="chips"></div>
+    <div class="input-wrap"><input aria-label="BCC recipients" type="text"></div>
   </div>
-  <input type="hidden" name="to" value="alice@mycompany.com,bob@bar.com">
-  <input type="hidden" name="cc" value="carol@mycompany.com">
-  <input type="hidden" name="bcc" value="">
 </div>

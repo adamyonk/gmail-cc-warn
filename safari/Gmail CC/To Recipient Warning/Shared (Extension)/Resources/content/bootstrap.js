@@ -1,4 +1,5 @@
 (async () => {
+  console.log('[gmail-cc-warn] bootstrap start');
   const url = (path) => chrome.runtime.getURL(path);
   const [storage, rules, parser, observer, ui] = await Promise.all([
     import(url('shared/storage.js')),
@@ -7,8 +8,10 @@
     import(url('content/observer.js')),
     import(url('content/ui.js'))
   ]);
+  console.log('[gmail-cc-warn] imports loaded');
 
   let config = await storage.getConfig();
+  console.log('[gmail-cc-warn] config loaded', JSON.stringify(config));
   const composeHandles = new Map();
 
   function currentSenderDomain() {
@@ -21,19 +24,27 @@
   }
 
   function isComposeDialog(dialog) {
-    return Boolean(
+    const result = Boolean(
       dialog.querySelector('[aria-label="To recipients"]')
         || dialog.querySelector('input[type="hidden"][name="to"]')
     );
+    console.log('[gmail-cc-warn] isComposeDialog', result, dialog.className?.slice(0, 40));
+    return result;
   }
 
   function onCompose(dialog) {
+    console.log('[gmail-cc-warn] onCompose called');
     const handle = ui.attachUi(dialog);
-    const detach = observer.startObserver(dialog, () => {
+    function evaluate() {
       const parsed = parser.parseCompose(dialog);
       parsed.senderDomain = currentSenderDomain();
-      handle.render(rules.evaluate(parsed, config));
-    });
+      const warnings = rules.evaluate(parsed, config);
+      console.log('[gmail-cc-warn] onChange parsed', JSON.stringify(parsed));
+      console.log('[gmail-cc-warn] onChange warnings', JSON.stringify(warnings));
+      handle.render(warnings);
+    }
+    const detach = observer.startObserver(dialog, evaluate);
+    evaluate();
     composeHandles.set(dialog, { detach, ui: handle });
   }
 
@@ -71,6 +82,7 @@
     }
   });
 
+  console.log('[gmail-cc-warn] observer attached');
   globalObserver.observe(document.body, { childList: true, subtree: true });
 
   storage.onConfigChange(newConfig => {

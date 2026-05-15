@@ -29,11 +29,13 @@
 
   function onCompose(dialog) {
     const handle = ui.attachUi(dialog);
-    const detach = observer.startObserver(dialog, () => {
+    function evaluate() {
       const parsed = parser.parseCompose(dialog);
       parsed.senderDomain = currentSenderDomain();
       handle.render(rules.evaluate(parsed, config));
-    });
+    }
+    const detach = observer.startObserver(dialog, evaluate);
+    evaluate();
     composeHandles.set(dialog, { detach, ui: handle });
   }
 

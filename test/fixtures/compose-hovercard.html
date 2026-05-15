@@ -1,9 +1,16 @@
 <div role="dialog">
-  <div aria-label="To recipients">
-    <div role="listbox">
-      <div role="option" data-hovercard-id="alice@mycompany.com">Alice</div>
+  <div class="to-field">
+    <div class="chips">
+      <div data-hovercard-id="alice@mycompany.com">Alice</div>
     </div>
+    <div class="input-wrap"><input aria-label="To recipients" type="text"></div>
   </div>
-  <div aria-label="Cc recipients"><div role="listbox"></div></div>
-  <div aria-label="Bcc recipients"><div role="listbox"></div></div>
+  <div class="cc-field">
+    <div class="chips"></div>
+    <div class="input-wrap"><input aria-label="CC recipients" type="text"></div>
+  </div>
+  <div class="bcc-field">
+    <div class="chips"></div>
+    <div class="input-wrap"><input aria-label="BCC recipients" type="text"></div>
+  </div>
 </div>

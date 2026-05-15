@@ -1,7 +1,7 @@
 const FIELD_ARIA_LABELS = {
   to: ['To recipients'],
-  cc: ['Cc recipients'],
-  bcc: ['Bcc recipients']
+  cc: ['CC recipients', 'Cc recipients'],
+  bcc: ['BCC recipients', 'Bcc recipients']
 };
 
 function extractEmailFromText(text) {
@@ -10,13 +10,18 @@ function extractEmailFromText(text) {
 }
 
 function extractFromChips(region) {
-  const chips = region.querySelectorAll('[role="option"]');
+  let chips = [...region.querySelectorAll('[role="option"]')];
+  if (chips.length === 0) chips = [...region.querySelectorAll('[data-hovercard-id]')];
+  const seen = new Set();
   const addresses = [];
   for (const chip of chips) {
     const email = chip.getAttribute('email')
       || chip.getAttribute('data-hovercard-id')
       || extractEmailFromText(chip.textContent || '');
-    if (email) addresses.push(email.trim());
+    if (email && !seen.has(email.trim())) {
+      seen.add(email.trim());
+      addresses.push(email.trim());
+    }
   }
   return addresses;
 }
@@ -28,8 +33,22 @@ function parseHiddenInputList(input) {
 
 function findFieldRegion(dialog, field) {
   for (const label of FIELD_ARIA_LABELS[field]) {
-    const node = dialog.querySelector(`[aria-label="${label}"]`);
-    if (node) return node;
+    const input = dialog.querySelector(`[aria-label="${label}"]`);
+    if (!input) continue;
+    const otherInputs = Object.entries(FIELD_ARIA_LABELS)
+      .filter(([f]) => f !== field)
+      .flatMap(([, labels]) => labels.map(l => dialog.querySelector(`[aria-label="${l}"]`)))
+      .filter(Boolean);
+    let el = input.parentElement;
+    while (el && el !== dialog) {
+      if (otherInputs.some(other => el.contains(other))) break;
+      if (el.querySelectorAll('[role="option"]').length > 0 ||
+          el.querySelectorAll('[data-hovercard-id]').length > 0) {
+        return el;
+      }
+      el = el.parentElement;
+    }
+    return input.parentElement;
   }
   return null;
 }
