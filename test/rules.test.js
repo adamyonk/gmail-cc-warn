@@ -100,3 +100,87 @@ test('rule1: disabled rule does not fire', () => {
   );
   assert.equal(result.find(w => w.id === 'multi-external'), undefined);
 });
+
+const sensitiveConfig = {
+  ...DEFAULTS,
+  internalDomains: ['mycompany.com'],
+  sensitiveAddresses: ['exec@mycompany.com', '*@list.mycompany.com']
+};
+
+test('rule2: no warning when sensitive present but no external', () => {
+  const result = evaluate(
+    { to: ['exec@mycompany.com', 'b@mycompany.com'], cc: [], bcc: [], senderDomain: 'mycompany.com' },
+    sensitiveConfig
+  );
+  assert.equal(result.find(w => w.id === 'sensitive-mixed'), undefined);
+});
+
+test('rule2: no warning when external present but no sensitive', () => {
+  const result = evaluate(
+    { to: ['a@mycompany.com', 'foo@bar.com'], cc: [], bcc: [], senderDomain: 'mycompany.com' },
+    sensitiveConfig
+  );
+  assert.equal(result.find(w => w.id === 'sensitive-mixed'), undefined);
+});
+
+test('rule2: fires when sensitive in To and external in CC', () => {
+  const result = evaluate(
+    { to: ['exec@mycompany.com'], cc: ['foo@bar.com'], bcc: [], senderDomain: 'mycompany.com' },
+    sensitiveConfig
+  );
+  const w = result.find(x => x.id === 'sensitive-mixed');
+  assert.ok(w);
+  assert.equal(w.severity, 'block');
+  assert.deepEqual(w.offenders.sensitive, ['exec@mycompany.com']);
+  assert.deepEqual(w.offenders.external, ['foo@bar.com']);
+});
+
+test('rule2: fires when external is in BCC (BCC counted for rule 2)', () => {
+  const result = evaluate(
+    { to: ['exec@mycompany.com'], cc: [], bcc: ['foo@bar.com'], senderDomain: 'mycompany.com' },
+    sensitiveConfig
+  );
+  assert.ok(result.find(w => w.id === 'sensitive-mixed'));
+});
+
+test('rule2: glob *@list.mycompany.com matches team@list.mycompany.com', () => {
+  const result = evaluate(
+    { to: ['team@list.mycompany.com', 'foo@bar.com'], cc: [], bcc: [], senderDomain: 'mycompany.com' },
+    sensitiveConfig
+  );
+  const w = result.find(x => x.id === 'sensitive-mixed');
+  assert.ok(w);
+  assert.deepEqual(w.offenders.sensitive, ['team@list.mycompany.com']);
+});
+
+test('rule2: sensitive match is case-insensitive', () => {
+  const result = evaluate(
+    { to: ['Exec@MyCompany.com'], cc: ['foo@bar.com'], bcc: [], senderDomain: 'mycompany.com' },
+    sensitiveConfig
+  );
+  assert.ok(result.find(w => w.id === 'sensitive-mixed'));
+});
+
+test('rule2: disabled rule does not fire', () => {
+  const config = {
+    ...sensitiveConfig,
+    rules: {
+      ...sensitiveConfig.rules,
+      sensitiveMixedWithExternal: { enabled: false }
+    }
+  };
+  const result = evaluate(
+    { to: ['exec@mycompany.com'], cc: ['foo@bar.com'], bcc: [], senderDomain: 'mycompany.com' },
+    config
+  );
+  assert.equal(result.find(w => w.id === 'sensitive-mixed'), undefined);
+});
+
+test('rules: both rules can fire simultaneously', () => {
+  const result = evaluate(
+    { to: ['exec@mycompany.com', 'foo@bar.com'], cc: [], bcc: [], senderDomain: 'mycompany.com' },
+    sensitiveConfig
+  );
+  assert.ok(result.find(w => w.id === 'multi-external'));
+  assert.ok(result.find(w => w.id === 'sensitive-mixed'));
+});
