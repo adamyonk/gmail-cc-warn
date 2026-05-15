@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Gmail CC/To Warn — Options</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <h1>Gmail CC/To Warn</h1>
+
+    <section>
+      <h2>Internal domains</h2>
+      <p>One per line. Sub-domains are not implied — list each explicitly.</p>
+      <textarea id="internalDomains" rows="4" placeholder="mycompany.com&#10;eu.mycompany.com"></textarea>
+    </section>
+
+    <section>
+      <h2>Sensitive addresses</h2>
+      <p>Full emails or globs like <code>*@list.mycompany.com</code>. When one of these appears alongside any external recipient, Send is blocked until you confirm.</p>
+      <textarea id="sensitiveAddresses" rows="4" placeholder="exec@mycompany.com&#10;*@list.mycompany.com"></textarea>
+    </section>
+
+    <section>
+      <h2>Rules</h2>
+      <label><input type="checkbox" id="rule1Enabled"> Warn when To/CC has multiple recipients including external</label>
+      <label>Threshold: <input type="number" id="rule1Threshold" min="2" value="2"></label>
+      <label><input type="checkbox" id="rule2Enabled"> Block when sensitive address appears with external recipient</label>
+    </section>
+
+    <button id="save">Save</button>
+    <span id="status" role="status"></span>
+
+    <p class="note">Settings are synced via your browser account (chrome.storage.sync).</p>
+  </main>
+  <script type="module" src="options.js"></script>
+</body>
+</html>
