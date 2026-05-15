@@ -34,6 +34,7 @@ function evaluateMultiRecipientWithExternal(parsed, config) {
   return {
     id: 'multi-external',
     severity: 'warn',
+    requireConfirmation: rule.requireConfirmation ?? true,
     message: `${toCc.length} recipients in To/CC, ${externals.length} external (${externals.join(', ')}). Consider BCC.`,
     externals
   };

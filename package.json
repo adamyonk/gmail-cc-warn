@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test 'test/**/*.test.js'"
+    "test": "node --test 'test/**/*.test.js'",
+    "firefox:sync": "cp manifest.firefox.json firefox-dev/manifest.json"
   },
   "devDependencies": {
     "jsdom": "^24.0.0"

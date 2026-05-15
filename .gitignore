@@ -1,4 +1,5 @@
 node_modules/
+firefox-dev/manifest.json
 .DS_Store
 safari/build/
 safari/*.xcodeproj/xcuserdata/

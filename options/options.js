@@ -16,6 +16,7 @@ async function load() {
   $('sensitiveAddresses').value = textareaFromLines(config.sensitiveAddresses);
   $('rule1Enabled').checked = config.rules.multiRecipientWithExternal.enabled;
   $('rule1Threshold').value = config.rules.multiRecipientWithExternal.threshold;
+  $('rule1RequireConfirmation').checked = config.rules.multiRecipientWithExternal.requireConfirmation;
   $('rule2Enabled').checked = config.rules.sensitiveMixedWithExternal.enabled;
 }
 
@@ -26,7 +27,8 @@ async function save() {
     rules: {
       multiRecipientWithExternal: {
         enabled: $('rule1Enabled').checked,
-        threshold: Math.max(2, Number($('rule1Threshold').value) || 2)
+        threshold: Math.max(2, Number($('rule1Threshold').value) || 2),
+        requireConfirmation: $('rule1RequireConfirmation').checked
       },
       sensitiveMixedWithExternal: {
         enabled: $('rule2Enabled').checked

@@ -1,8 +1,8 @@
 const STYLES = `
   :host { all: initial; }
-  .banner { font: 13px/1.4 -apple-system, system-ui, sans-serif; padding: 8px 12px; border-radius: 4px; margin: 4px 8px; }
-  .banner.warn  { background: #fff3cd; color: #664d03; border: 1px solid #ffe69c; }
-  .banner.block { background: #f8d7da; color: #58151c; border: 1px solid #f1aeb5; }
+  .banner { font: 13px/1.4 -apple-system, system-ui, sans-serif; padding: 10px 16px; margin: 0; }
+  .banner.warn  { background: #f9ab00; color: #202124; }
+  .banner.block { background: #c5221f; color: #fff; }
   .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 2147483647; display: flex; align-items: center; justify-content: center; }
   .modal { background: #fff; padding: 16px 20px; border-radius: 6px; max-width: 480px; font: 13px/1.4 -apple-system, system-ui, sans-serif; }
   .modal h2 { margin: 0 0 8px; font-size: 15px; }
@@ -27,14 +27,15 @@ export function attachUi(dialog) {
   const doc = dialog.ownerDocument;
   const host = doc.createElement('div');
   host.setAttribute('data-gmail-cc-warn', 'host');
-  host.style.cssText = 'all:initial; display:block;';
+  host.style.cssText = 'all:initial; display:block; background:#fff;';
   const shadow = host.attachShadow({ mode: 'closed' });
   shadow.appendChild(makeStyleNode(doc));
 
   const container = doc.createElement('div');
   shadow.appendChild(container);
 
-  dialog.prepend(host);
+  const titleBar = dialog.firstElementChild;
+  if (titleBar) titleBar.after(host); else dialog.prepend(host);
 
   let currentWarnings = [];
   let acked = false;
