@@ -6,6 +6,7 @@ firefox-dev/icons/
 firefox-dev/options/
 firefox-dev/shared/
 .DS_Store
+safari-src/manifest.json
 safari/build/
 safari/**/*.xcodeproj/xcuserdata/
 safari/**/*.xcworkspace/xcuserdata/

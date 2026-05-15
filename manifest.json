@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Gmail CC/To Recipient Warning",
+  "name": "Gmail CC Warn",
   "version": "0.1.0",
   "description": "Warns when Gmail compose recipients risk leaking addresses.",
   "permissions": ["storage"],
