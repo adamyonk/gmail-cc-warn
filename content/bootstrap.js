@@ -75,6 +75,10 @@
 
   globalObserver.observe(document.body, { childList: true, subtree: true });
 
+  for (const d of document.querySelectorAll('[role="dialog"]')) {
+    if (!composeHandles.has(d) && isComposeDialog(d)) onCompose(d);
+  }
+
   storage.onConfigChange(newConfig => {
     config = newConfig;
     for (const [dialog, entry] of composeHandles) {

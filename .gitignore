@@ -1,5 +1,10 @@
 node_modules/
 firefox-dev/manifest.json
+firefox-dev/background/
+firefox-dev/content/
+firefox-dev/icons/
+firefox-dev/options/
+firefox-dev/shared/
 .DS_Store
 safari/build/
 safari/**/*.xcodeproj/xcuserdata/

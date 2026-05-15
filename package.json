@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test 'test/**/*.test.js'",
-    "firefox:sync": "cp manifest.firefox.json firefox-dev/manifest.json"
+    "firefox:sync": "cp manifest.firefox.json firefox-dev/manifest.json && rsync -a --delete background/ firefox-dev/background/ && rsync -a --delete content/ firefox-dev/content/ && rsync -a --delete icons/ firefox-dev/icons/ && rsync -a --delete options/ firefox-dev/options/ && rsync -a --delete shared/ firefox-dev/shared/"
   },
   "devDependencies": {
     "jsdom": "^24.0.0"
