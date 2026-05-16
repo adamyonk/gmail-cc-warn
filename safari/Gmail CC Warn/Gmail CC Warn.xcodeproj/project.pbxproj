@@ -528,7 +528,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.adamyonk.Gmail-CC-Warn";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.adamyonk.gmail-cc-warn";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -569,7 +569,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.adamyonk.Gmail-CC-Warn";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.adamyonk.gmail-cc-warn";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
